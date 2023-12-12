@@ -2,7 +2,7 @@
   "name": "quantize-colors",
   "version": "1.0.0",
   "description": "A versatile Node.js package for efficient color quantization, palette building, and complementary color generation.",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,5 +13,8 @@
     "complementary"
   ],
   "author": "Ritoban Goswami",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "get-pixels": "^3.3.3"
+  }
 }

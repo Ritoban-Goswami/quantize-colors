@@ -1,0 +1,28 @@
+# Node.js
+node_modules/
+
+# Dependency directories
+/lib
+/vendor
+/typings
+
+# Distribution directory
+/dist
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Optional: OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional: Editor/IDE-specific files
+.vscode/
+.idea/
+
+# Optional: Configuration files
+*.json
+*.yaml
+*.yml

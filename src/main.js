@@ -142,6 +142,26 @@ const buildRgb = (imageData) => {
     return rgbValues;
 };
 
+const isMonochromeColor = (color) => {
+    // Check if the color is monochrome (black, white, or shades of grey)
+    return color.r === color.g && color.g === color.b;
+};
+
+const calculateSaturation = (color) => {
+    // Calculate saturation in HSL color space
+    const max = Math.max(color.r, color.g, color.b) / 255;
+    const min = Math.min(color.r, color.g, color.b) / 255;
+    const lightness = (max + min) / 2;
+
+    if (max === min) {
+        return 0; // achromatic (grayscale)
+    } else {
+        const delta = max - min;
+        const saturation = lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min);
+        return saturation;
+    }
+};
+
 const getQuantizedColors = (imageUrl) => {
     return new Promise((resolve, reject) => {
         getPixels(imageUrl, function (err, pixels) {
@@ -166,6 +186,13 @@ const getColorPalette = (imageUrl, colorDifferenceThreshold = 120) => {
             for (let i = 0; i < orderedByColor.length; i++) {
                 const hexColor = rgbToHex(orderedByColor[i]);
 
+                // Exclude monochrome colors (black, white, and shades of grey)
+                const isMonochrome = isMonochromeColor(orderedByColor[i]);
+                if (isMonochrome) {
+                    continue;
+                }
+
+                // Check color difference with the previous color
                 if (i > 0 && calculateColorDifference(orderedByColor[i], orderedByColor[i - 1]) < colorDifferenceThreshold) {
                     continue;
                 }
@@ -179,22 +206,22 @@ const getColorPalette = (imageUrl, colorDifferenceThreshold = 120) => {
         });
 }
 
-const getDominantColor = (imageUrl) => {
-    return getQuantizedColors(imageUrl)
-        .then((quantColors) => {
-            if (quantColors.length === 0) {
-                throw new Error('No quantized colors found.');
+const getDominantColor = (imageUrl, colorDifferenceThreshold = 120) => {
+    return getColorPalette(imageUrl, colorDifferenceThreshold)
+        .then((colorPalette) => {
+            if (colorPalette.length === 0) {
+                throw new Error('No non-monochrome colors found in the palette.');
             }
 
-            // Find the color with the highest luminance (most dominant)
-            const mostDominantColor = quantColors.reduce((prevColor, currentColor) => {
-                const prevLuminance = calculateLuminance(prevColor);
-                const currentLuminance = calculateLuminance(currentColor);
+            // Find the most dominant color based on saturation
+            const mostDominantColor = colorPalette.reduce((prevColor, currentColor) => {
+                const prevSaturation = calculateSaturation(prevColor);
+                const currentSaturation = calculateSaturation(currentColor);
 
-                return currentLuminance > prevLuminance ? currentColor : prevColor;
+                return currentSaturation > prevSaturation ? currentColor : prevColor;
             });
 
-            return rgbToHex(mostDominantColor);
+            return mostDominantColor;
         })
         .catch((err) => {
             throw err; // or handle the error as needed

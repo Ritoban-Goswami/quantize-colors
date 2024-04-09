@@ -18,7 +18,7 @@ npm install quantize-colors
 
 ## Usage
 
-```bash
+```js
 const quantizeColors = require('quantize-colors');
 
 // Example: Get the quantized colors of an image

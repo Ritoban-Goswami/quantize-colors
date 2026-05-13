@@ -23,6 +23,5 @@ Thumbs.db
 .idea/
 
 # Optional: Configuration files
-*.json
 *.yaml
 *.yml

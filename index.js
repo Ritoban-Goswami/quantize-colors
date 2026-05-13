@@ -1,4 +1,2 @@
 // index.js
-const quantizeColors = require('./src/main');
-
-module.exports = quantizeColors;
+export * from './src/main.js';

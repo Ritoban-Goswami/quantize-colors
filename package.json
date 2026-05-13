@@ -25,5 +25,8 @@
   "license": "ISC",
   "dependencies": {
     "get-pixels": "^3.3.3"
+  },
+  "overrides": {
+    "form-data": "^4.0.0"
   }
 }

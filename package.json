@@ -1,6 +1,6 @@
 {
   "name": "quantize-colors",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A versatile package for efficient color quantization and palette building. Works in both Node.js and browser environments.",
   "type": "module",
   "main": "index.js",
@@ -8,9 +8,11 @@
   "exports": {
     ".": {
       "import": "./index.js",
-      "default": "./index.js"
+      "default": "./index.js",
+      "types": "./quantize-colors.d.ts"
     }
   },
+  "types": "./quantize-colors.d.ts",
   "scripts": {},
   "keywords": [
     "color",

@@ -5,9 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-05-14
+
+### Fixed
+
+- Add TypeScript types export to package.json for proper IDE support
+
 ## [1.1.0] - 2026-05-14
 
 ### Added
+
 - Browser environment support alongside Node.js
 - Support for multiple input types in browser: HTMLImageElement, HTMLCanvasElement, ImageBitmap, Blob, File
 - OffscreenCanvas support for Web Workers
@@ -16,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CHANGELOG.md for tracking version history
 
 ### Changed
+
 - Refactored codebase for better maintainability:
   - Extracted magic numbers to constants (CANVAS_SIZE, MAX_DEPTH, thresholds)
   - Created helper functions: createCanvas, getCanvasContext, processImageSource, processCanvasElement
@@ -26,10 +34,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated README with environment-specific usage examples
 
 ### Fixed
+
 - Canvas creation now properly falls back from OffscreenCanvas to regular canvas
 - Better error handling for unsupported input types
 
 ## [1.0.2] - Previous Release
 
 ### Note
+
 - Previous version history not documented in this changelog
